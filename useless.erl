@@ -22,7 +22,7 @@
 -endif.
 
 
-debug_add(A, B) -> io:format("~n", A), io:format(B), ?DEBUG(A + B).
+debug_add(A, B) -> io:format("~p~p~p~n", [A, '+', B]), ?DEBUG(A + B).
 
 
 %% Shows greetings.
