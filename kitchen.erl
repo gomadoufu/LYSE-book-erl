@@ -41,6 +41,26 @@ fridge2(FoodList) ->
     end.
 
 
+store(Pid, Food) ->
+    Pid ! {self(), {store, Food}},
+    receive
+        {Pid, Msg} ->
+            Msg
+    end.
+
+
+take(Pid, Food) ->
+    Pid ! {self(), {take, Food}},
+    receive
+        {Pid, Msg} ->
+            Msg
+    end.
+
+
+start(FoodList) ->
+    spawn(?MODULE, fridge2, [FoodList]).
+
+
 client(DestPid) ->
     Input = string:chomp(io:get_line("Give me some input (store/take/list/close):\n")),
     case string:split(Input, " ") of
